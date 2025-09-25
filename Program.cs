@@ -59,9 +59,9 @@ namespace mydiary
                         Console.WriteLine("Ogiltigt val, ange 1-6 och försök igen.");
                         break;
                 }
-                        Console.WriteLine();
-                }
+                Console.WriteLine();
             }
+        }
         static void ShowMenu() //Menuchoice
         {
             Console.WriteLine("Gör ett val:");
@@ -88,9 +88,33 @@ namespace mydiary
             entries.Add(entry);
 
             if (!entriesByDate.ContainsKey(date))
-            { 
-            
+            {
+                entriesByDate[date] = new List<diaryEntre>();
             }
+            entriesByDate[date].Add(entry);
+
+            Console.WriteLine("Dagboksanteckning tillagd!");
+        }
+        static DateTime PromtForDate(string promt)
+        {
+            while (true)
+            {
+            Console.Write(promt);
+            string input = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    return DateTime.Today;
+                }
+                else (DateTime.TryParseExact(input, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+                {
+                    return date;
+                }
+                Console.WriteLine("Ogiltigt datumformat. Använd ÅÅÅÅ-MM-DD");
+            }
+        }
+        static void ListEntries() //List Entries
+        { 
+        
         }
     }
 }
