@@ -14,9 +14,14 @@ namespace mydiary
     }
     class Program
     {
-        static void Main(string[] args)
+        static List<diaryEntry> entries = new List<diaryEntry>();
+        static Dictionary<DateTime, List<diaryEntre>> entriesByDate = new Dictionary<DateTime, List<diaryEntre>>();
+        const string filePath = "mydiary.json";
+        static void Main() //Hälsningsfras
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("Välkommen till min lilla enkla dagbok :)\n");
+
+            LoadFromFile();
         }
     }
 }
