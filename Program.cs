@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Xml.Linq;
 
@@ -16,7 +17,7 @@ namespace mydiary
     class Program
     {
         static List<diaryEntry> entries = new List<diaryEntry>();
-        static Dictionary<DateTime, List<diaryEntre>> entriesByDate = new Dictionary<DateTime, List<diaryEntre>>();
+        static Dictionary<DateTime, List<diaryEntry>> entriesByDate = new Dictionary<DateTime, List<diaryEntre>>();
         const string filePath = "mydiary.json";
         static void Main() //Hälsningsfras
         {
@@ -150,6 +151,39 @@ namespace mydiary
                 Console.WriteLine($"Dagboksanteckningar sparade till {filePath}.");
             }
             catch (Exception ex)
+            {
+                Console.WriteLine($"Fel vid sparande av fil: {ex.Message}");
+            }
+        }
+        static void LoadFromFile() //Load from file
+        {
+            try
+            {
+                if (!File.Exists(filePath))
+                {
+                    Console.WriteLine($"Filen {filePath} finns inte.");
+                    return;
+                }
+                string json = File.ReadAllText(filePath);
+                entries = JsonSerializer.Deserialize<List<diaryEntry>>(json) ?? new List<diaryEntry>();
+
+                entriesByDate.Clear();
+                foreach (var entry in entries)
+                {
+                    if (!entriesByDate.ContainsKey(entry.date))
+                    {
+                        entriesByDate[entry.date] = new List<diaryEntry>();
+                    }
+                    entriesByDate[entry.date].Add(entry);
+                }
+
+                Console.WriteLine($"Dagboksanteckningar lästa från {filePath}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fel vid läsning från fil: {ex.Message}");
+            }
+            
         }
     }
 }
