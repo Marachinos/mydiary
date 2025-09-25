@@ -95,7 +95,7 @@ namespace mydiary
 
             Console.WriteLine("Dagboksanteckning tillagd!");
         }
-        static DateTime PromtForDate(string promt)
+        static DateTime PromtForDate(string promt) //promt for date
         {
             while (true)
             {
@@ -113,8 +113,21 @@ namespace mydiary
             }
         }
         static void ListEntries() //List Entries
+        {
+            if (entries.Count == 0)
+            {
+                Console.WriteLine("inga dagboksanteckningar att visa.");
+                return;
+            }
+            var sortedEntries = entries.OrderBy(e => e.date).ToList();
+            foreach (var entry in sortedEntries)
+            { 
+                Console.WriteLine($"{entry.date:yyyy-MM-dd}");
+            }
+        }
+        static void SearchByDate() //Search by date
         { 
-        
+            
         }
     }
 }
