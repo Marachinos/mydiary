@@ -59,9 +59,38 @@ namespace mydiary
                         Console.WriteLine("Ogiltigt val, ange 1-6 och försök igen.");
                         break;
                 }
-                Console.WriteLine();
+                        Console.WriteLine();
                 }
             }
+        static void ShowMenu() //Menuchoice
+        {
+            Console.WriteLine("Gör ett val:");
+            Console.WriteLine("1. Lägg till en Ny dagboksanteckning");
+            Console.WriteLine("2. Lista alla dagboksanteckningar");
+            Console.WriteLine("3. Sök en dagbakosanteckning via datum");
+            Console.WriteLine("4. Spara dagboksanteckning till fil");
+            Console.WriteLine("5. Läs dagboksanteckning från fil");
+            Console.WriteLine("6. Avsluta");
+            Console.Write("Gör ditt val: ");
+        }
+        static void AddEntry() //Börja skriva i dagboken, Start to write in diary
+        {
+            DateTime date = PromtForDate("Ange datum: ");
+            string text;
+            do
+            {
+                Console.Write("Skriv din dagboksanteckning:\n");
+                text = Console.ReadLine();
+            }
+            while (string.IsNullOrWhiteSpace(text));
 
+            var entry = new diaryEntry { date = date, text = text };
+            entries.Add(entry);
+
+            if (!entriesByDate.ContainsKey(date))
+            { 
+            
+            }
+        }
     }
 }
