@@ -12,12 +12,12 @@ namespace mydiary
     public class diaryEntry //Diary Entry Class
     { 
     public DateTime date { get; set; }
-        public string name { get; set; }
+        public string text { get; set; }
     }
     class Program
     {
         static List<diaryEntry> entries = new List<diaryEntry>();
-        static Dictionary<DateTime, List<diaryEntry>> entriesByDate = new Dictionary<DateTime, List<diaryEntre>>();
+        static Dictionary<DateTime, List<diaryEntry>> entriesByDate = new Dictionary<DateTime, List<diaryEntry>>();
         const string filePath = "mydiary.json";
         static void Main() //Hälsningsfras
         {
@@ -49,7 +49,7 @@ namespace mydiary
                         break;
                     case "6":
                         Console.WriteLine("Vill du spara ändringarna innan du avslutar? (j/n)");
-                        if (Console.ReadLine()?.ToLower() == j)
+                        if (Console.ReadLine()?.ToLower() == "j")
                         {
                             SaveToFile();
                         }
@@ -90,7 +90,7 @@ namespace mydiary
 
             if (!entriesByDate.ContainsKey(date))
             {
-                entriesByDate[date] = new List<diaryEntre>();
+                entriesByDate[date] = new List<diaryEntry>();
             }
             entriesByDate[date].Add(entry);
 
@@ -106,7 +106,7 @@ namespace mydiary
                 {
                     return DateTime.Today;
                 }
-                else (DateTime.TryParseExact(input, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+                if (DateTime.TryParseExact(input, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
                 {
                     return date;
                 }
@@ -117,13 +117,13 @@ namespace mydiary
         {
             if (entries.Count == 0)
             {
-                Console.WriteLine("inga dagboksanteckningar att visa.");
+                Console.WriteLine("Inga dagboksanteckningar att visa.");
                 return;
             }
             var sortedEntries = entries.OrderBy(e => e.date).ToList();
             foreach (var entry in sortedEntries)
             { 
-                Console.WriteLine($"{entry.date:yyyy-MM-dd}");
+                Console.WriteLine($"{entry.date:yyyy-MM-dd}: {entry.text}");
             }
         }
         static void SearchByDate() //Search by date
@@ -131,7 +131,7 @@ namespace mydiary
             DateTime date = PromtForDate("Ange datum att söka efter (ÅÅÅÅ-MM-DD): ");
             if (entriesByDate.TryGetValue(date, out List<diaryEntry> dayEntries))
             {
-                Console.WriteLine($"Anteckningar för {date:yyyy-MM-dd}:");
+                Console.WriteLine($"Anteckningar för {date:yyyy-MM-dd}: ");
                 foreach (var entry in dayEntries)
                 {
                     Console.WriteLine($"- {entry.text}");
