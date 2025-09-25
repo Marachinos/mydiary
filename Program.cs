@@ -126,8 +126,30 @@ namespace mydiary
             }
         }
         static void SearchByDate() //Search by date
-        { 
-            
+        {
+            DateTime date = PromtForDate("Ange datum att söka efter (ÅÅÅÅ-MM-DD): ");
+            if (entriesByDate.TryGetValue(date, out List<diaryEntry> dayEntries))
+            {
+                Console.WriteLine($"Anteckningar för {date:yyyy-MM-dd}:");
+                foreach (var entry in dayEntries)
+                {
+                    Console.WriteLine($"- {entry.text}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Ingen anteckning hittades för {date:yyyy-MM-dd}.");
+            }
+        }
+        static void SaveToFile() //Save to the file
+        {
+            try
+            {
+                string json = JsonSerializer.Serialize(entries);
+                File.WriteAllText(filePath, json);
+                Console.WriteLine($"Dagboksanteckningar sparade till {filePath}.");
+            }
+            catch (Exception ex)
         }
     }
 }
