@@ -19,14 +19,14 @@ namespace mydiary
         static List<diaryEntry> entries = new List<diaryEntry>();
         static Dictionary<DateTime, List<diaryEntry>> entriesByDate = new Dictionary<DateTime, List<diaryEntry>>();
         const string filePath = "mydiary.json";
-        static void Main() //Hälsningsfras
+        static void Main() //Hälsningsfras. Welcome message
         {
             //Bytt färg på Välkomstexten. Changed color of welcome text
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Välkommen till min lilla enkla dagbok :)\n");
             Console.ResetColor();
 
-            SilentLoadFromFile(); //laddar dagboksfilen utan att skriva ut något, loads the diary file without printing anything
+            SilentLoadFromFile(); //laddar dagboksfilen utan att skriva ut något. Loads the diary file without printing anything
 
 
             while (true)
@@ -67,7 +67,7 @@ namespace mydiary
                 Console.WriteLine();
             }
         }
-        static void ShowMenu() //Menuchoice
+        static void ShowMenu() //Menyval. Menuchoice
         {
             Console.WriteLine("Gör ett val:");
             Console.WriteLine("1. Lägg till en Ny dagboksanteckning");
@@ -100,7 +100,8 @@ namespace mydiary
 
             Console.WriteLine("Dagboksanteckning tillagd!");
         }
-        static DateTime PromtForDate(string promt) //promt for date
+        static DateTime PromtForDate(string promt) //Metod med fråga om datum och kontroll av rätt datum.
+                                                   //Method with question about date and control of correct date
         {
             while (true)
             {
@@ -117,7 +118,7 @@ namespace mydiary
                 Console.WriteLine("Ogiltigt datumformat. Använd ÅÅÅÅ-MM-DD");
             }
         }
-        static void ListEntries() //List Entries
+        static void ListEntries() //Listar sparade anteckningar. List Entries
         {
             if (entries.Count == 0)
             {
@@ -130,7 +131,7 @@ namespace mydiary
                 Console.WriteLine($"{entry.date:yyyy-MM-dd}: {entry.text}");
             }
         }
-        static void SearchByDate() //Search by date
+        static void SearchByDate() //Sök med datum. Search by date
         {
             DateTime date = PromtForDate("Ange datum att söka efter (ÅÅÅÅ-MM-DD): ");
             if (entriesByDate.TryGetValue(date, out List<diaryEntry> dayEntries))
@@ -149,7 +150,7 @@ namespace mydiary
                 Console.ResetColor();
             }
         }
-        static void SaveToFile() //Save to the file
+        static void SaveToFile() //Spara till fil. Save to the file
         {
             try
             {
@@ -165,7 +166,7 @@ namespace mydiary
                 Console.ResetColor();
             }
         }
-        static void LoadFromFile() //Load from file
+        static void LoadFromFile() //ladda från fil. Load from file
         {
             try
             {
