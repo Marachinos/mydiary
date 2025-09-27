@@ -21,9 +21,10 @@ namespace mydiary
         const string filePath = "mydiary.json";
         static void Main() //Hälsningsfras
         {
-            Console.WriteLine("Välkommen till min lilla enkla dagbok :)\n");
+            Console.WriteLine("Välkommen till min lilla enkla dagbok :)\n"); //Byt färg
 
-            LoadFromFile();
+            SilentLoadFromFile(); //laddar dagboksfilen utan att skriva ut något, loads the diary file without printing anything
+
 
             while (true)
             {
@@ -57,7 +58,7 @@ namespace mydiary
                         return;
 
                     default:
-                        Console.WriteLine("Ogiltigt val, ange 1-6 och försök igen.");
+                        Console.WriteLine("Ogiltigt val, ange 1-6 och försök igen."); //byt färg
                         break;
                 }
                 Console.WriteLine();
@@ -68,7 +69,7 @@ namespace mydiary
             Console.WriteLine("Gör ett val:");
             Console.WriteLine("1. Lägg till en Ny dagboksanteckning");
             Console.WriteLine("2. Lista alla dagboksanteckningar");
-            Console.WriteLine("3. Sök en dagbakosanteckning via datum");
+            Console.WriteLine("3. Sök en dagboksanteckning via datum");
             Console.WriteLine("4. Spara dagboksanteckning till fil");
             Console.WriteLine("5. Läs dagboksanteckning från fil");
             Console.WriteLine("6. Avsluta");
@@ -110,7 +111,7 @@ namespace mydiary
                 {
                     return date;
                 }
-                Console.WriteLine("Ogiltigt datumformat. Använd ÅÅÅÅ-MM-DD");
+                Console.WriteLine("Ogiltigt datumformat. Använd ÅÅÅÅ-MM-DD"); //byt färg
             }
         }
         static void ListEntries() //List Entries
@@ -139,7 +140,7 @@ namespace mydiary
             }
             else
             {
-                Console.WriteLine($"Ingen anteckning hittades för {date:yyyy-MM-dd}.");
+                Console.WriteLine($"Ingen anteckning hittades för {date:yyyy-MM-dd}."); //Byt färg
             }
         }
         static void SaveToFile() //Save to the file
@@ -152,7 +153,7 @@ namespace mydiary
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Fel vid sparande av fil: {ex.Message}");
+                Console.WriteLine($"Fel vid sparande av fil: {ex.Message}"); //Byt färg
             }
         }
         static void LoadFromFile() //Load from file
@@ -161,7 +162,7 @@ namespace mydiary
             {
                 if (!File.Exists(filePath))
                 {
-                    Console.WriteLine($"Filen {filePath} finns inte.");
+                    Console.WriteLine($"Filen {filePath} finns inte."); //Byt färg
                     return;
                 }
                 string json = File.ReadAllText(filePath);
@@ -181,9 +182,29 @@ namespace mydiary
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Fel vid läsning från fil: {ex.Message}");
+                Console.WriteLine($"Fel vid läsning från fil: {ex.Message}"); //Byt färg
             }
-            
         }
+        static void SilentLoadFromFile() //Tyst laddning av filen. Silent load from file
+        {
+            try
+            {
+                if (!File.Exists(filePath)) return;
+                string json = File.ReadAllText(filePath);
+                entries = JsonSerializer.Deserialize<List<diaryEntry>>(json) ?? new List<diaryEntry>();
+
+                entriesByDate.Clear();
+                foreach (var entry in entries)
+                {
+                    if (!entriesByDate.ContainsKey(entry.date))
+                    {
+                        entriesByDate[entry.date] = new List<diaryEntry>();
+                    }
+                    entriesByDate[entry.date].Add(entry);
+                }
+            }
+            catch { /* Ignorera fel vid tyst laddning */ }
+        }
+
     }
 }
