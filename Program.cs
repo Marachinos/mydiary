@@ -52,7 +52,9 @@ namespace mydiary
                         LoadFromFile();
                         break;
                     case "6":
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("Vill du spara ändringarna innan du avslutar? (j/n)");
+                        Console.ResetColor();
                         if (Console.ReadLine()?.ToLower() == "j")
                         {
                             SaveToFile();
@@ -61,7 +63,9 @@ namespace mydiary
                         return;
 
                     default:
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Ogiltigt val. Ange 1-6 och försök igen.");
+                        Console.ResetColor();
                         break;
                 }
                 Console.WriteLine();
@@ -80,7 +84,7 @@ namespace mydiary
         }
         static void AddEntry() //Börja skriva i dagboken, Start to write in diary
         {
-            DateTime date = PromtForDate("Ange datum: ");
+            DateTime date = PromtForDate("Ange datum (lämna tomt för dagens datum): ");
             string text;
             do
             {
@@ -115,14 +119,18 @@ namespace mydiary
                 {
                     return date;
                 }
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ogiltigt datumformat. Använd ÅÅÅÅ-MM-DD");
+                Console.ResetColor();
             }
         }
-        static void ListEntries() //Listar sparade anteckningar. List Entries
+        static void ListEntries() //Listar sparade anteckningar. List saved entries
         {
             if (entries.Count == 0)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("Inga dagboksanteckningar att visa.");
+                Console.ResetColor();
                 return;
             }
             var sortedEntries = entries.OrderBy(e => e.date).ToList();

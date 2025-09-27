@@ -21,8 +21,9 @@ Detta gör sökningen effektiv och enkel att implementera.
 
 Som I/O-format valdes **JSON** eftersom det är lättläst. 
 Lätt att serialisera i C# och fungerar bra för att spara strukturerad data som listor av objekt. 
-# Fick lära mig att serialisera är viktigt för att kunna spara och läsa data på ett strukturerat sätt.
-# Och att deserialisering är lika viktigt för att kunna återställa data från det sparade formatet.
+
+//Fick lära mig att serialisera är viktigt för att kunna spara och läsa data på ett strukturerat sätt.\\
+//Och att deserialisering är lika viktigt för att kunna återställa data från det sparade formatet.\\
 
 Felhantering sker främst med `try-catch`-block vid filinläsning och -skrivning för att undvika att programmet 
 kraschar vid fel, t.ex. om filen inte finns eller är korrupt. Dessutom används `DateTime.TryParseExact` 
