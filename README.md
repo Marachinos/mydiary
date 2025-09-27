@@ -1,33 +1,32 @@
 # mydiary 
-En enkel dagboksapp
-MyDiary är en enkel konsolapplikation i C# där användaren kan skriva, spara och läsa dagboksanteckningar. 
-Anteckningar kan listas, sökas på datum och sparas i en JSON-fil (`mydiary.json`). 
-Applikationen använder en meny där användaren kan välja olika funktioner, som att lägga till nya anteckningar eller läsa gamla.
+MyDiary Ã¤r en enkel konsolapplikation i C# dÃ¤r anvÃ¤ndaren kan skriva, spara och lÃ¤sa dagboksanteckningar. 
+Anteckningar kan listas, sÃ¶kas pÃ¥ datum och sparas i en JSON-fil (`mydiary.json`). 
+Applikationen anvÃ¤nder en meny dÃ¤r anvÃ¤ndaren kan vÃ¤lja olika funktioner, som att lÃ¤gga till nya anteckningar eller lÃ¤sa gamla.
 
 # Funktioner
-1. Användaren gör ett val i menyn
-2. Väljer användaren att Skriva ny anteckning så skriver man datum och sen skriver en anteckning
-3. Anteckningen sparas, via menyn eller med en fråga på slutet, i en gemensam .jsonfil
-4. Användaren kan välja att visa alla sina anteckningar i appen
-5. Användaren kan söka efter sina anteckningar via datum
-6. När man vill avsluta appen får man en fråga om man vill spara anteckningen man gjort, oavsett om man sparat den via det enskilda valet eller inte.
+1. AnvÃ¤ndaren gÃ¶r ett val i menyn
+2. VÃ¤ljer anvÃ¤ndaren att Skriva ny anteckning sÃ¥ skriver man datum (eller lÃ¤mnar tomt fÃ¶r dagens datum) och sen skriver en anteckning
+3. Anteckningen sparas, via menyn eller med en frÃ¥ga pÃ¥ slutet, i en gemensam .jsonfil
+4. AnvÃ¤ndaren kan vÃ¤lja att visa alla sina anteckningar i appen
+5. AnvÃ¤ndaren kan sÃ¶ka efter sina anteckningar via datum
+6. NÃ¤r man vill avsluta appen fÃ¥r man en frÃ¥ga om man vill spara anteckningen man gjort, oavsett om man sparat den via det enskilda valet eller inte.
 
 
 
 # Kort reflektion  
-I projektet används en **`List<diaryEntry>`** för att lagra alla dagboksanteckningar och
-en **`Dictionary<DateTime, List<diaryEntry>>`** för att snabbt kunna söka efter anteckningar baserat på datum. 
-Detta gör sökningen effektiv och enkel att implementera.  
+I projektet anvÃ¤nds en **`List<diaryEntry>`** fÃ¶r att lagra alla dagboksanteckningar och
+en **`Dictionary<DateTime, List<diaryEntry>>`** fÃ¶r att snabbt kunna sÃ¶ka efter anteckningar baserat pÃ¥ datum. 
+Detta gÃ¶r sÃ¶kningen effektiv och enkel att implementera.  
 
-Som I/O-format valdes **JSON** eftersom det är lättläst. 
-Lätt att serialisera i C# och fungerar bra för att spara strukturerad data som listor av objekt. 
+Som I/O-format valdes **JSON** eftersom det Ã¤r lÃ¤ttlÃ¤st. 
+LÃ¤tt att serialisera i C# och fungerar bra fÃ¶r att spara strukturerad data som listor av objekt. 
 
-//Fick lära mig att serialisera är viktigt för att kunna spara och läsa data på ett strukturerat sätt.\\
-//Och att deserialisering är lika viktigt för att kunna återställa data från det sparade formatet.\\
+//Fick lÃ¤ra mig att serialisera Ã¤r viktigt fÃ¶r att kunna spara och lÃ¤sa data pÃ¥ ett strukturerat sÃ¤tt.\\
+//Och att deserialisering Ã¤r lika viktigt fÃ¶r att kunna Ã¥terstÃ¤lla data frÃ¥n det sparade formatet.\\
 
-Felhantering sker främst med `try-catch`-block vid filinläsning och -skrivning för att undvika att programmet 
-kraschar vid fel, t.ex. om filen inte finns eller är korrupt. Dessutom används `DateTime.TryParseExact` 
-för att hantera felaktiga datumformat på ett säkert sätt.  
+Felhantering sker frÃ¤mst med `try-catch`-block vid filinlÃ¤sning och -skrivning fÃ¶r att undvika att programmet 
+kraschar vid fel, t.ex. om filen inte finns eller Ã¤r korrupt. Dessutom anvÃ¤nds `DateTime.TryParseExact` 
+fÃ¶r att hantera felaktiga datumformat pÃ¥ ett sÃ¤kert sÃ¤tt.  
 
-Koden är tänkt att vara robust nog för nybörjare men ändå enkel att förstå och vidareutveckla.
+Koden Ã¤r tÃ¤nkt att vara robust nog fÃ¶r nybÃ¶rjare men Ã¤ndÃ¥ enkel att fÃ¶rstÃ¥ och vidareutveckla.
 
