@@ -21,7 +21,10 @@ namespace mydiary
         const string filePath = "mydiary.json";
         static void Main() //Hälsningsfras
         {
-            Console.WriteLine("Välkommen till min lilla enkla dagbok :)\n"); //Byt färg
+            //Bytt färg på Välkomstexten. Changed color of welcome text
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Välkommen till min lilla enkla dagbok :)\n");
+            Console.ResetColor();
 
             SilentLoadFromFile(); //laddar dagboksfilen utan att skriva ut något, loads the diary file without printing anything
 
@@ -58,7 +61,7 @@ namespace mydiary
                         return;
 
                     default:
-                        Console.WriteLine("Ogiltigt val, ange 1-6 och försök igen."); //byt färg
+                        Console.WriteLine("Ogiltigt val. Ange 1-6 och försök igen.");
                         break;
                 }
                 Console.WriteLine();
@@ -111,7 +114,7 @@ namespace mydiary
                 {
                     return date;
                 }
-                Console.WriteLine("Ogiltigt datumformat. Använd ÅÅÅÅ-MM-DD"); //byt färg
+                Console.WriteLine("Ogiltigt datumformat. Använd ÅÅÅÅ-MM-DD");
             }
         }
         static void ListEntries() //List Entries
@@ -140,7 +143,10 @@ namespace mydiary
             }
             else
             {
-                Console.WriteLine($"Ingen anteckning hittades för {date:yyyy-MM-dd}."); //Byt färg
+                //Bytt färg till röd för felmeddelande. Changed color to red for error message
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Ingen anteckning hittades för {date:yyyy-MM-dd}.");
+                Console.ResetColor();
             }
         }
         static void SaveToFile() //Save to the file
@@ -153,7 +159,10 @@ namespace mydiary
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Fel vid sparande av fil: {ex.Message}"); //Byt färg
+                //Bytt färg till röd för felmeddelande. Changed color to red for error message
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Fel vid sparande av fil: {ex.Message}");
+                Console.ResetColor();
             }
         }
         static void LoadFromFile() //Load from file
@@ -162,7 +171,10 @@ namespace mydiary
             {
                 if (!File.Exists(filePath))
                 {
-                    Console.WriteLine($"Filen {filePath} finns inte."); //Byt färg
+                    //Bytt färg till röd för felmeddelande. Changed color to red for error message
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Filen {filePath} finns inte.");
+                    Console.ResetColor();
                     return;
                 }
                 string json = File.ReadAllText(filePath);
@@ -182,7 +194,10 @@ namespace mydiary
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Fel vid läsning från fil: {ex.Message}"); //Byt färg
+                //Bytt färg till röd för felmeddelande. Changed color to red for error message
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Fel vid läsning från fil: {ex.Message}"); 
+                Console.ResetColor();
             }
         }
         static void SilentLoadFromFile() //Tyst laddning av filen. Silent load from file
@@ -203,7 +218,7 @@ namespace mydiary
                     entriesByDate[entry.date].Add(entry);
                 }
             }
-            catch { /* Ignorera fel vid tyst laddning */ }
+            catch { } //Ignorera fel vid tyst laddning. Ignore errors during silent load
         }
 
     }
