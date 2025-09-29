@@ -31,3 +31,7 @@ för att hantera felaktiga datumformat på ett säkert sätt.
 
 Koden är tänkt att vara robust nog för nybörjare men ändå enkel att förstå och vidareutveckla.
 
+La till menyvalen Delete och Edit för att kunna ta bort och redigera anteckningar.
+
+Projektet är byggt med .NET 8.0 och C# 12.0.
+

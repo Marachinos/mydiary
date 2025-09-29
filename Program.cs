@@ -39,8 +39,11 @@ namespace mydiary
             Console.WriteLine("3. Sök en dagboksanteckning via datum");
             Console.WriteLine("4. Spara dagboksanteckning till fil");
             Console.WriteLine("5. Läs dagboksanteckning från fil");
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("6. Avsluta");
+            Console.ResetColor();
             Console.WriteLine("7. Radera en dagboksanteckning");
+            Console.WriteLine("8. Redigera en dagboksanteckning");
             Console.Write("Gör ditt val: ");
         }
 
@@ -80,6 +83,9 @@ namespace mydiary
                     break;
                 case "7":
                     DeleteEntry();
+                    break;
+                case "8":
+                    EditEntry();
                     break;
             }
         }
@@ -220,6 +226,46 @@ namespace mydiary
                         entriesByDate.Remove(date);
                     }
                     Console.WriteLine("Anteckningen har raderats.");
+                }
+                else
+                {
+                    ErrorMessages.ShowInvalidChoice();
+                }
+            }
+            else
+            {
+                ErrorMessages.ShowNoEntriesFound(date);
+            }
+        }
+
+        static void EditEntry() //Edit an entry by date
+        {
+            DateTime date = PromtForDate("Ange datum för anteckningen du vill redigera (ÅÅÅÅ-MM-DD): ");
+            if (entriesByDate.TryGetValue(date, out List<DiaryEntry> dayEntries) && dayEntries.Count > 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"Anteckningar för {date:yyyy-MM-dd}: ");
+                Console.ResetColor();
+                for (int i = 0; i < dayEntries.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {dayEntries[i].text}");
+                }
+                Console.Write("Ange numret på anteckningen du vill redigera: ");
+                if (int.TryParse(Console.ReadLine(), out int index) && index >= 1 && index <= dayEntries.Count)
+                {
+                    var entryToEdit = dayEntries[index - 1];
+                    Console.WriteLine($"Nuvarande text: {entryToEdit.text}");
+                    Console.Write("Ange ny text (lämna tomt för att behålla nuvarande text): ");
+                    string newText = Console.ReadLine();
+                    if (!string.IsNullOrWhiteSpace(newText))
+                    {
+                        entryToEdit.text = newText;
+                        Console.WriteLine("Anteckningen har uppdaterats.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ingen ändring gjordes.");
+                    }
                 }
                 else
                 {
