@@ -166,7 +166,7 @@ namespace mydiary
             }
         }
 
-        static void LoadFromFile()
+        static void LoadFromFile() //Load from file
         {
             try
             {
