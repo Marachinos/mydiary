@@ -20,7 +20,7 @@ namespace mydiary
             Console.WriteLine("Välkommen till min lilla enkla dagbok :)\n");
             Console.ResetColor();
 
-            SilentLoadFromFile();
+            SilentLoadFromFile(); //Silent load from file
 
             while (true)
             {
@@ -196,7 +196,7 @@ namespace mydiary
             }
         }
 
-        static void SilentLoadFromFile()
+        static void SilentLoadFromFile() //Silent load from file, Tyst uppladnning från filen.
         {
             try
             {
