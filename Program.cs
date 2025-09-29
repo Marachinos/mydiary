@@ -72,7 +72,7 @@ namespace mydiary
                         SaveToFile();
                     }
                     Console.WriteLine("Avslutar programmet.");
-                    Environment.Exit(0); // Avslutar programmet direkt
+                    Environment.Exit(0); 
                     break;
                 default:
                     ErrorMessages.ShowInvalidChoice();
@@ -80,7 +80,7 @@ namespace mydiary
             }
         }
 
-        static void AddEntry()
+        static void AddEntry() //Add Entry to the diary
         {
             DateTime date = PromtForDate("Ange datum (lämna tomt för dagens datum): ");
             string text;
