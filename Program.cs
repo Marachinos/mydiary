@@ -92,7 +92,7 @@ namespace mydiary
 
         static void AddEntry() //Add Entry to the diary
         {
-            DateTime date = PromtForDate("Ange datum (lämna tomt för dagens datum): ");
+            DateTime date = PromtForDate("\nAnge datum (lämna tomt för dagens datum): ");
             string text;
             do
             {
@@ -110,7 +110,9 @@ namespace mydiary
             }
             entriesByDate[date].Add(entry);
 
-            Console.WriteLine("Dagboksanteckning tillagd!");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("\nDagboksanteckning tillagd!");
+            Console.ResetColor();
         }
 
         static DateTime PromtForDate(string promt) //Promt for date
@@ -141,7 +143,7 @@ namespace mydiary
             var sortedEntries = entries.OrderBy(e => e.date).ToList();
             foreach (var entry in sortedEntries)
             {
-                Console.WriteLine($"{entry.date:yyyy-MM-dd}: {entry.text}");
+                Console.WriteLine($"\n{entry.date:yyyy-MM-dd}: {entry.text}");
             }
         }
 
@@ -197,7 +199,6 @@ namespace mydiary
                     }
                     entriesByDate[entry.date].Add(entry);
                 }
-
                 Console.WriteLine($"Dagboksanteckningar lästa från {filePath}");
             }
             catch (Exception ex)
