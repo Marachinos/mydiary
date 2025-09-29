@@ -2,7 +2,7 @@
 
 namespace mydiary
 {
-    public static class ErrorMessages
+    public static class ErrorMessages //ErrorMessages Class for displaying error messages
     {
         public static void ShowInvalidChoice()
         {
@@ -48,7 +48,7 @@ namespace mydiary
 
         public static void ShowNoEntriesToList()
         {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Inga dagboksanteckningar att visa.");
             Console.ResetColor();
         }
