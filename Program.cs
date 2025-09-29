@@ -121,7 +121,7 @@ namespace mydiary
             }
         }
 
-        static void ListEntries()
+        static void ListEntries() //List all the entries
         {
             if (entries.Count == 0)
             {
