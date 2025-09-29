@@ -103,7 +103,7 @@ namespace mydiary
             Console.WriteLine("Dagboksanteckning tillagd!");
         }
 
-        static DateTime PromtForDate(string promt)
+        static DateTime PromtForDate(string promt) //Promt for date
         {
             while (true)
             {
