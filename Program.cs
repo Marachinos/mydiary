@@ -43,7 +43,8 @@ namespace mydiary
             Console.Write("Gör ditt val: ");
         }
 
-        static void HandleMenuChoice(string choice) 
+        static void HandleMenuChoice(string choice) //6 diffrent cases and
+                                                    //a Question when you Exit if you want to save before Exit the app.
         {
             switch (choice)
             {
