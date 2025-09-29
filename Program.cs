@@ -31,7 +31,7 @@ namespace mydiary
             }
         }
 
-        static void ShowMenu()
+        static void ShowMenu() //Shows the menychoice
         {
             Console.WriteLine("Gör ett val:");
             Console.WriteLine("1. Lägg till en Ny dagboksanteckning");
@@ -43,7 +43,7 @@ namespace mydiary
             Console.Write("Gör ditt val: ");
         }
 
-        static void HandleMenuChoice(string choice)
+        static void HandleMenuChoice(string choice) 
         {
             switch (choice)
             {
