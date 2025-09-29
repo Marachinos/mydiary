@@ -135,7 +135,7 @@ namespace mydiary
             }
         }
 
-        static void SearchByDate()
+        static void SearchByDate() //Search by date
         {
             DateTime date = PromtForDate("Ange datum att söka efter (ÅÅÅÅ-MM-DD): ");
             if (entriesByDate.TryGetValue(date, out List<DiaryEntry> dayEntries))
