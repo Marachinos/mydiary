@@ -152,7 +152,7 @@ namespace mydiary
             }
         }
 
-        static void SaveToFile()
+        static void SaveToFile() //Save to file
         {
             try
             {
