@@ -40,6 +40,7 @@ namespace mydiary
             Console.WriteLine("4. Spara dagboksanteckning till fil");
             Console.WriteLine("5. Läs dagboksanteckning från fil");
             Console.WriteLine("6. Avsluta");
+            Console.WriteLine("7. Radera en dagboksanteckning");
             Console.Write("Gör ditt val: ");
         }
 
@@ -76,6 +77,9 @@ namespace mydiary
                     break;
                 default:
                     ErrorMessages.ShowInvalidChoice();
+                    break;
+                case "7":
+                    DeleteEntry();
                     break;
             }
         }
@@ -193,6 +197,38 @@ namespace mydiary
             catch (Exception ex)
             {
                 ErrorMessages.ShowFileLoadError(ex.Message);
+            }
+        }
+        static void DeleteEntry() //Delete an entry by date
+        {
+            DateTime date = PromtForDate("Ange datum för anteckningen du vill radera (ÅÅÅÅ-MM-DD): ");
+            if (entriesByDate.TryGetValue(date, out List<DiaryEntry> dayEntries) && dayEntries.Count > 0)
+            {
+                Console.WriteLine($"Anteckningar för {date:yyyy-MM-dd}: ");
+                for (int i = 0; i < dayEntries.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {dayEntries[i].text}");
+                }
+                Console.Write("Ange numret på anteckningen du vill radera: ");
+                if (int.TryParse(Console.ReadLine(), out int index) && index >= 1 && index <= dayEntries.Count)
+                {
+                    var entryToRemove = dayEntries[index - 1];
+                    entries.Remove(entryToRemove);
+                    dayEntries.RemoveAt(index - 1);
+                    if (dayEntries.Count == 0)
+                    {
+                        entriesByDate.Remove(date);
+                    }
+                    Console.WriteLine("Anteckningen har raderats.");
+                }
+                else
+                {
+                    ErrorMessages.ShowInvalidChoice();
+                }
+            }
+            else
+            {
+                ErrorMessages.ShowNoEntriesFound(date);
             }
         }
 
